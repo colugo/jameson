@@ -2,7 +2,7 @@ import CodeMirror from 'codemirror';
 var syllable = require('syllable');
 
 export function addSentenceMode(simplemde){
-  var indentGuidesOverlay = {
+  var sentenceMode = {
           token: function (stream, state) {
             var text = "";
             while(!stream.eol() && stream.peek() != '.'){
@@ -16,7 +16,7 @@ export function addSentenceMode(simplemde){
           },
       };
 
-  simplemde.codemirror.addOverlay(indentGuidesOverlay);
+  simplemde.codemirror.addOverlay(sentenceMode);
 };
 
 function wordsFromSentence(sentence){

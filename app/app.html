@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Jameson Copy Editor</title>
   <link href="stylesheets/main.css" rel="stylesheet" type="text/css">
-  <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"-->
+  <link href="stylesheets/opentip.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div id="editor">
@@ -12,6 +12,16 @@
       # Jameson Copy Editor
     </textarea>
   </div>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/opentip-jquery-excanvas.js"></script>
   <script src="app.js"></script>
+
+  <!-- Insert this line after script imports -->
+  <script>if (window.module) module = window.module;</script>
+
 </body>
 </html>

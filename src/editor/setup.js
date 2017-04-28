@@ -3,6 +3,7 @@
 import SimpleMDE from 'simplemde';
 
 import {addSentenceMode} from './sentence';
+import {addReplaceMode} from './replace';
 
 export const setup = () => {
   var simplemde = new SimpleMDE({
@@ -51,5 +52,19 @@ export const setup = () => {
   	toolbarTips: true
   });
   addSentenceMode(simplemde);
+  addReplaceMode(simplemde);
+
+  simplemde.codemirror.on("change", function() {
+/*
+    var class_names= document.getElementsByClassName("cm-replace");
+
+    for (var i = 0; i < class_names.length; i++) {
+        class_names[i].addEventListener('mouseover', my_function, false);
+    }*/
+    new Opentip("span.cm-overlay.cm-replace", "Optional content");
+
+
+  });
+
   return simplemde;
 };
