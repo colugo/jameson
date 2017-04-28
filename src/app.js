@@ -6,7 +6,7 @@ import './helpers/external_links.js';
 
 
 import SimpleMDE from 'simplemde';
-import { setup } from './editor/editor';
+import { setup } from './editor/setup';
 var simplemde = setup();
 
 /*
