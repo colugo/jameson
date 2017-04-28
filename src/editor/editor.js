@@ -80,15 +80,26 @@ function howManyLetters(sentence){
 }
 
 function processSentence(sentence){
-  if(sentenceIsDifficult(sentence)) return "difficult";
+  if(sentenceIsHard(sentence)) return "hard";
+  if(sentenceIsMedium(sentence)) return "medium";
 }
 
-function sentenceIsDifficult(sentence){
+function sentenceIsMedium(sentence){
   var words = wordsFromSentence(sentence);
   if(words.length > 25){
     return true;
   }
   if(howManyLetters(sentence) > 99){
+    return true;
+  }
+}
+
+function sentenceIsHard(sentence){
+  var words = wordsFromSentence(sentence);
+  if(words.length > 35){
+    return true;
+  }
+  if(howManyLetters(sentence) > 138){
     return true;
   }
 }
