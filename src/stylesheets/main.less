@@ -16,8 +16,12 @@
   height: calc(~"100vh - 120px");
 }
 
-.CodeMirror .cm-colugo {
-    background: rgba(120, 0, 255, .15);
+.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+    background: rgba(255, 0, 0, .55);
+}
+
+.CodeMirror .cm-difficult {
+  background: rgba(255, 0, 0, .15);
 }
 
 #editor{

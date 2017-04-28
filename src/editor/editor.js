@@ -52,19 +52,43 @@ export const setup = () => {
   return simplemde;
 };
 
-
-
 function addMode(simplemde){
   var indentGuidesOverlay = {
           token: function (stream, state) {
-                  var char = stream.next();
-                  if(char == " "){
-                    return null;
-                  }
-                  return "colugo";
+            var text = "";
+            while(!stream.eol() && stream.peek() != '.'){
+              var char = stream.next();
+              text = text + char;
+            }
+            if(text !== ""){
+              return processSentence(text);
+            }
+            stream.next();
           },
       };
 
   simplemde.codemirror.addOverlay(indentGuidesOverlay);
 
 };
+
+function wordsFromSentence(sentence){
+  return sentence.split(/\s+/);
+}
+
+function howManyLetters(sentence){
+  return sentence.replace(/\s+/g, '').length;
+}
+
+function processSentence(sentence){
+  if(sentenceIsDifficult(sentence)) return "difficult";
+}
+
+function sentenceIsDifficult(sentence){
+  var words = wordsFromSentence(sentence);
+  if(words.length > 25){
+    return true;
+  }
+  if(howManyLetters(sentence) > 99){
+    return true;
+  }
+}
