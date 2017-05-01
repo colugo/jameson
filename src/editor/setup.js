@@ -56,18 +56,26 @@ export const setup = () => {
 
   simplemde.codemirror.on("change", function() {
 
-    var class_names= document.getElementsByClassName("cm-replace");
+    var wordToReplace= document.getElementsByClassName("cm-replace");
 
-    for (var i = 0; i < class_names.length; i++) {
-        var tipText = "Clearer"
-        if(class_names[i].innerText == "replace"){
-          tipText = "Simpler";
-        }
-        new Opentip(class_names[i], tipText);
+    for (var i = 0; i < wordToReplace.length; i++) {
+        getId(wordToReplace[i]);
+        new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5});
     }
-    //new Opentip("span.cm-overlay.cm-replace", content ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5});
   });
   return simplemde;
 };
 
-var content = function() { return document.createElement("span").html="<ul><li><a href='#'>simpler</a></li><li><a href='#'>clearer</a></li><li><a href='#'>faster</a></li></ul>"; };
+var replaceTooltipContent = function(wordSpan) {
+  return document.createElement("span").html="<ul><li><a href='#'>simpler</a></li><li><a href='#'>clearer</a></li><li><a href='#' onclick=\"replaceHandler(\'" + wordSpan.id + "\', \'faster\');\">faster</a></li></ul>";
+};
+
+var getId = (function () {
+  var incrementingId = 0;
+  return function(element) {
+    if (!element.id) {
+      element.id = "id_" + incrementingId++;
+    }
+    return element.id;
+  };
+}());
