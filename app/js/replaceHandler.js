@@ -1,4 +1,5 @@
 var jamesonEditor;
+var plainEnglishReplacements;
 
 function replaceHandler(wordSpan, newWord) {
 

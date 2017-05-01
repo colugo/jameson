@@ -14,6 +14,9 @@ export function addReplaceMode(simplemde){
             if(text == "also"){
               return "replace";
             }
+            if(text == "woot"){
+              return "replace";
+            }
             stream.next();
           },
       };

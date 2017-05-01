@@ -5,9 +5,17 @@ import './helpers/context_menu.js';
 import './helpers/external_links.js';
 
 
+import { remote } from 'electron';
+import jetpack from 'fs-jetpack';
+const app = remote.app;
+const appDir = jetpack.cwd(app.getAppPath());
+plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
+
+
 import SimpleMDE from 'simplemde';
 import { setup } from './editor/setup';
 jamesonEditor = setup();
+
 
 /*
 

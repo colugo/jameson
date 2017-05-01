@@ -60,14 +60,32 @@ export const setup = () => {
 
     for (var i = 0; i < wordToReplace.length; i++) {
         getId(wordToReplace[i]);
-        new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5});
+        new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5, removeElementsOnHide: true});
     }
   });
   return simplemde;
 };
 
 var replaceTooltipContent = function(wordSpan) {
-  return document.createElement("span").html="<ul><li><a href='#'>simpler</a></li><li><a href='#'>clearer</a></li><li><a href='#' onclick=\"replaceHandler(\'" + wordSpan.id + "\', \'faster\');\">faster</a></li></ul>";
+  /*
+  a number of	-> some, many, few
+  address this issue ->	look for solutions, solve this problem
+
+  var replacements = {
+     "also":["some","many","few"],
+     "replace":["look for solutions", "solve this problem"]
+   };
+   */
+
+  var word = wordSpan.innerText;
+  var html = "<ul>";
+  for(var i = 0; i < plainEnglishReplacements[word].length; i ++){
+    var option = plainEnglishReplacements[word][i];
+    var li = "<li><a href='#' onclick=\"replaceHandler(\'" + wordSpan.id + "\', \'" + option + "\');\">" + option + "</a></li>";
+    html = html + li;
+  }
+  html = html + "</ul>";
+  return document.createElement("span").html=html;
 };
 
 var getId = (function () {
