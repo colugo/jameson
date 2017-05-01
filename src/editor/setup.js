@@ -55,16 +55,19 @@ export const setup = () => {
   addReplaceMode(simplemde);
 
   simplemde.codemirror.on("change", function() {
-/*
+
     var class_names= document.getElementsByClassName("cm-replace");
 
     for (var i = 0; i < class_names.length; i++) {
-        class_names[i].addEventListener('mouseover', my_function, false);
-    }*/
-    new Opentip("span.cm-overlay.cm-replace", "Optional content");
-
-
+        var tipText = "Clearer"
+        if(class_names[i].innerText == "replace"){
+          tipText = "Simpler";
+        }
+        new Opentip(class_names[i], tipText);
+    }
+    //new Opentip("span.cm-overlay.cm-replace", content ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5});
   });
-
   return simplemde;
 };
+
+var content = function() { return document.createElement("span").html="<ul><li><a href='#'>simpler</a></li><li><a href='#'>clearer</a></li><li><a href='#'>faster</a></li></ul>"; };
