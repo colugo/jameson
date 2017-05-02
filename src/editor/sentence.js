@@ -33,25 +33,27 @@ function processSentence(sentence){
 }
 
 function sentenceIsMedium(sentence){
-  /*
+/*
   var words = wordsFromSentence(sentence);
   if(words.length > 25){
     return true;
   }
   if(howManyLetters(sentence) > 99){
     return true;
-  }*/
-  if(syllable(sentence) > 30) return true;
+  }
+  */
+  if(syllable(sentence) > 20) return true;
 }
 
 function sentenceIsHard(sentence){
-  /*
+/*
   var words = wordsFromSentence(sentence);
   if(words.length > 35){
     return true;
   }
   if(howManyLetters(sentence) > 138){
     return true;
-  }*/
-  if(syllable(sentence) > 35) return true;
+  }
+*/
+  if(syllable(sentence) > 30) return true;
 }

@@ -55,42 +55,9 @@ export const setup = () => {
   addReplaceMode(simplemde);
 
   simplemde.codemirror.on("update", function() {
-
-    var wordToReplace= document.getElementsByClassName("cm-replace");
-
-    if(wordToReplace.length > 0 ){
-
-      Opentip.tips = [];
-
-      for (var i = 0; i < wordToReplace.length; i++) {
-          getId(wordToReplace[i]);
-          var tip = new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
-      }
-    }
+    setupReplaceHandler();
+    setupReadabilityHandler();
   });
 
   return simplemde;
 };
-
-var replaceTooltipContent = function(wordSpan) {
-
-  var word = wordSpan.innerText.toLowerCase();
-  var html = "<ul>";
-  for(var i = 0; i < plainEnglishReplacements[word].length; i ++){
-    var option = plainEnglishReplacements[word][i];
-    var li = "<li><a href='#' onclick=\"replaceHandler(\'" + wordSpan.id + "\', \'" + option + "\');\">" + option + "</a></li>";
-    html = html + li;
-  }
-  html = html + "</ul>";
-  return document.createElement("span").html=html;
-};
-
-var getId = (function () {
-  var incrementingId = 0;
-  return function(element) {
-    if (!element.id) {
-      element.id = "id_" + incrementingId++;
-    }
-    return element.id;
-  };
-}());
