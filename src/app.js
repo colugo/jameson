@@ -18,7 +18,7 @@ function setupReplacementWords(){
   {
     plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString + key + "|";
   }
-  plainEnglishReplacementsRegex = new RegExp(plainEnglishReplacementsKeywordString);
+  plainEnglishReplacementsRegex = new RegExp(plainEnglishReplacementsKeywordString, 'i');
 }
 
 

@@ -64,7 +64,7 @@ export const setup = () => {
 
       for (var i = 0; i < wordToReplace.length; i++) {
           getId(wordToReplace[i]);
-          new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
+          var tip = new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
       }
     }
   });
@@ -74,7 +74,7 @@ export const setup = () => {
 
 var replaceTooltipContent = function(wordSpan) {
 
-  var word = wordSpan.innerText;
+  var word = wordSpan.innerText.toLowerCase();
   var html = "<ul>";
   for(var i = 0; i < plainEnglishReplacements[word].length; i ++){
     var option = plainEnglishReplacements[word][i];
