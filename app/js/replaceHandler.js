@@ -1,14 +1,16 @@
 var jamesonEditor;
 var plainEnglishReplacements;
+var plainEnglishReplacementsKeywords;
+var plainEnglishReplacementsRegex;
 
 function replaceHandler(wordSpan, newWord) {
 
   var cursor = jamesonEditor.codemirror.getCursor();
-  //$('#id_7').closest("pre").prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().text()
 
   var containerPre = $('#' + wordSpan).closest("pre");
   var previous = containerPre.prev();
-  var text = newWord;
+  var text = containerPre.text().replace(/\u200B/g,'').replace($('#' + wordSpan).text(), newWord);
+
   while(previous.length > 0){
     if(previous[0].style.display == "none"){
       previous = previous.prev();
@@ -30,10 +32,8 @@ function replaceHandler(wordSpan, newWord) {
   }
 
   text = text.replace(/\u200B/g,'');
-  console.log(text);
-  //alert($('#' + wordSpan).text() + ": -> " + newWord );
-  //$('#' + wordSpan).text(newWord)
 
   jamesonEditor.codemirror.setValue(text);
   jamesonEditor.codemirror.setCursor(cursor);
+  jamesonEditor.codemirror.focus();
 }

@@ -54,28 +54,25 @@ export const setup = () => {
   addSentenceMode(simplemde);
   addReplaceMode(simplemde);
 
-  simplemde.codemirror.on("change", function() {
+  simplemde.codemirror.on("update", function() {
 
     var wordToReplace= document.getElementsByClassName("cm-replace");
 
-    for (var i = 0; i < wordToReplace.length; i++) {
-        getId(wordToReplace[i]);
-        new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseenter", hideDelay: 1.5, removeElementsOnHide: true});
+    if(wordToReplace.length > 0 ){
+
+      Opentip.tips = [];
+
+      for (var i = 0; i < wordToReplace.length; i++) {
+          getId(wordToReplace[i]);
+          new Opentip(wordToReplace[i], replaceTooltipContent(wordToReplace[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
+      }
     }
   });
+
   return simplemde;
 };
 
 var replaceTooltipContent = function(wordSpan) {
-  /*
-  a number of	-> some, many, few
-  address this issue ->	look for solutions, solve this problem
-
-  var replacements = {
-     "also":["some","many","few"],
-     "replace":["look for solutions", "solve this problem"]
-   };
-   */
 
   var word = wordSpan.innerText;
   var html = "<ul>";

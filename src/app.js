@@ -10,6 +10,17 @@ import jetpack from 'fs-jetpack';
 const app = remote.app;
 const appDir = jetpack.cwd(app.getAppPath());
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
+setupReplacementWords();
+
+function setupReplacementWords(){
+  var plainEnglishReplacementsKeywordString = "";
+  for(var key in plainEnglishReplacements)
+  {
+    plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString + key + "|";
+  }
+  plainEnglishReplacementsRegex = new RegExp(plainEnglishReplacementsKeywordString);
+}
+
 
 
 import SimpleMDE from 'simplemde';

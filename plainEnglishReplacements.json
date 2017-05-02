@@ -1,5 +1,5 @@
 {
-  "also":["some","many","few"],
-  "replace":["look for solutions", "solve this problem"],
-  "woot":["foo", "bar"]
+  "a number of":["some","many","few"],
+  "address this issue":["look for solutions", "solve this problem"],
+  "also": ["foo, bar"]
 }

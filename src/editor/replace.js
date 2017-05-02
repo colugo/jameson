@@ -2,23 +2,21 @@ import CodeMirror from 'codemirror';
 
 export function addReplaceMode(simplemde){
   var replaceMode = {
-          token: function (stream, state) {
-            var text = "";
-            while(!stream.eol() && stream.peek() != '.'){
-              var char = stream.next();
-              text = text + char;
-            }
-            if(text == "replace"){
-              return "replace";
-            }
-            if(text == "also"){
-              return "replace";
-            }
-            if(text == "woot"){
-              return "replace";
-            }
-            stream.next();
-          },
+        token: function (stream, state) {
+          /*
+          stream.eatWhile(/\w+/);
+          console.log(stream.current());
+          var ch = stream.next();
+          var cur = stream.current();
+          if (plainEnglishReplacementsKeywords.propertyIsEnumerable(cur)) return "replace";
+          */
+          stream.match(plainEnglishReplacementsRegex);
+          var phrase = stream.current();
+          if(phrase.length > 0){
+            return "replace";
+          }
+          var ch = stream.next();
+        }
       };
 
   simplemde.codemirror.addOverlay(replaceMode);
