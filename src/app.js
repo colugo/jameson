@@ -3,11 +3,13 @@
 // Small helpers you might want to keep
 import './helpers/context_menu.js';
 
-
 import { remote } from 'electron';
 import jetpack from 'fs-jetpack';
 const app = remote.app;
+const dialog = remote.dialog;
 const appDir = jetpack.cwd(app.getAppPath());
+
+
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
 setupReplacementWords();
 
@@ -27,6 +29,29 @@ import SimpleMDE from 'simplemde';
 import { setup } from './editor/setup';
 jamesonEditor = setup();
 
+const ipcRenderer = require('electron').ipcRenderer;
+
+ipcRenderer.on('open', (event,message) => {
+    var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+
+
+  dialog.showOpenDialog((fileNames) => {
+    // fileNames is an array that contains all the selected
+    if(fileNames === undefined){
+        console.log("No file selected");
+        return;
+    }
+
+    fs.readFile(fileNames[0], 'utf-8', (err, data) => {
+      if(err){
+          alert("An error ocurred reading the file :" + err.message);
+          return;
+      }
+
+      jamesonEditor.codemirror.setValue(data);
+    });
+  });
+});
 
 /*
 

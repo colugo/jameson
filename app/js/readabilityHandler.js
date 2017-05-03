@@ -25,7 +25,11 @@ function setupReadabilityHandler(){
   console.log("Reading level = " + grade);
 */
   var score = 0.39 * (wordCount / numberOfSentences) + 11.8 * (syllables / wordCount) - 15.59;
-  if(score < 0) score = "-";
-  $('.readability').text(score.toFixed());
+  if(score < 0){
+     score = "-";
+   }else{
+     score = score.toFixed();
+   }
+  $('.readability').text(score);
   $('.wordCount').text(wordCount);
 }

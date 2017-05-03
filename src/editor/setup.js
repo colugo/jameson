@@ -11,7 +11,7 @@ export const setup = () => {
   var simplemde = new SimpleMDE({
   	autofocus: true,
   	autosave: {
-  		enabled: true,
+  		enabled: false,
   		uniqueId: "MyUniqueID",
   		delay: 1000,
   	},
@@ -23,7 +23,7 @@ export const setup = () => {
   	forceSync: true,
   	hideIcons: ["heading","fullscreen","table","code"],
   	indentWithTabs: false,
-  	initialValue: "Hello world!",
+  	initialValue: "",
   	insertTexts: {
   		horizontalRule: ["", "\n\n-----\n\n"],
   		image: ["![](http://", ")"],
@@ -36,7 +36,7 @@ export const setup = () => {
   		strikethrough: false,
   		underscoresBreakWords: true,
   	},
-  	placeholder: "Type here...",
+  	placeholder: "",
 
   	promptURLs: true,
   	renderingConfig: {

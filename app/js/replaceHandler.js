@@ -1,6 +1,5 @@
 var jamesonEditor;
 var plainEnglishReplacements;
-var plainEnglishReplacementsKeywords;
 var plainEnglishReplacementsRegex;
 
 function replaceHandler(wordSpan, newWord) {
