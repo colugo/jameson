@@ -51,6 +51,7 @@ export const setup = () => {
   	status: ["words"],
   	styleSelectedText: false,
   	tabSize: 4,
+    toolbar: false,
   	toolbarTips: true
   });
   addSentenceMode(simplemde);
