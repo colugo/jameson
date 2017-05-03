@@ -7,7 +7,7 @@ export const fileMenuTemplate = {
     label: 'Open',
     accelerator: 'CmdOrCtrl+O',
     click: () => {
-      BrowserWindow.getFocusedWindow().webContents.send('open', 'whoooooooh!');
+      BrowserWindow.getFocusedWindow().webContents.send('open');
     },
   },
   {

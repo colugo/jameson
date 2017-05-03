@@ -2,12 +2,14 @@
 
 // Small helpers you might want to keep
 import './helpers/context_menu.js';
-
+var md5 = require('md5');
 import { remote } from 'electron';
 import jetpack from 'fs-jetpack';
 const app = remote.app;
+const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 const appDir = jetpack.cwd(app.getAppPath());
+var textMD5 = "";
 
 
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
@@ -31,10 +33,13 @@ jamesonEditor = setup();
 
 const ipcRenderer = require('electron').ipcRenderer;
 
-ipcRenderer.on('open', (event,message) => {
-    var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+ipcRenderer.on('open', (event) => {
+  showModal();
+});
 
-
+function _open(){
+  var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+  closeModal();
   dialog.showOpenDialog((fileNames) => {
     // fileNames is an array that contains all the selected
     if(fileNames === undefined){
@@ -49,10 +54,49 @@ ipcRenderer.on('open', (event,message) => {
       }
 
       jamesonEditor.codemirror.setValue(data);
+      textMD5 = md5(jamesonEditor.codemirror.getValue());
     });
   });
-});
+}
 
+function closeModal(){
+  var modal = document.getElementById('myModal');
+  modal.style.display = "none";
+}
+
+function showModal(){
+
+
+  $('#modal-header-content').text("You have unsaved changes!");
+  $('.modal-body').html("<p>You will lose your chanages if you open another document.</p><p>Are you sure you want to do this?</p>");
+
+/*
+  var btn = document.createElement("BUTTON");
+  $('.modal-footer').appendChild(btn);
+*/
+
+  var buttonDiv = document.getElementById('modal-footer');
+  buttonDiv.innerHTML = "";
+
+  var okButton = document.createElement("button");
+  okButton.innerHTML="Yes, I'm OK to lose my changes";
+  buttonDiv.appendChild(okButton);
+  okButton.addEventListener ("click", _open);
+
+  var noButton = document.createElement("button");
+  noButton.innerHTML="No, I want to keep my changes";
+  buttonDiv.appendChild(noButton);
+  noButton.addEventListener ("click", closeModal);
+
+
+  // Get the modal
+  var modal = document.getElementById('myModal');
+  modal.style.display = "block";
+
+  // When the user clicks on <span> (x), close the modal
+  $('.close').on('click', closeModal);
+
+}
 /*
 
 // All stuff below is just to show you how it works. You can delete all of it.
