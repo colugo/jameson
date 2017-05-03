@@ -18,9 +18,9 @@ import env from './env';
 const setApplicationMenu = () => {
   const menus = [editMenuTemplate];
   menus.push(fileMenuTemplate);
-  if (env.name !== 'production') {
+  //if (env.name !== 'production') {
     menus.push(devMenuTemplate);
-  }
+  //}
   Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
 };
 

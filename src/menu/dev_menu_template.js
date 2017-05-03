@@ -2,7 +2,8 @@ import { app, BrowserWindow } from 'electron';
 
 export const devMenuTemplate = {
   label: 'Development',
-  submenu: [{
+  submenu: [
+    {
     label: 'Reload',
     accelerator: 'CmdOrCtrl+R',
     click: () => {
@@ -15,12 +16,5 @@ export const devMenuTemplate = {
     click: () => {
       BrowserWindow.getFocusedWindow().toggleDevTools();
     },
-  },
-  {
-    label: 'Quit',
-    accelerator: 'CmdOrCtrl+Q',
-    click: () => {
-      app.quit();
-    },
-  }],
+  }]
 };
