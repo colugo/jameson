@@ -10,6 +10,7 @@ const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 const appDir = jetpack.cwd(app.getAppPath());
 var textMD5 = md5("");
+var currentFileName = "";
 
 
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
@@ -53,7 +54,26 @@ ipcRenderer.on('saveas', (event) => {
   _save();
 });
 
+ipcRenderer.on('save', (event) => {
+  if(currentFileName != ""){
+    _save();
+  }else{
+    _saveas();
+  }
+});
+
 function _save(){
+  var fs = require('fs');
+    fs.writeFile(currentFileName, jamesonEditor.codemirror.getValue(), (err) => {
+        if(err){
+            alert("An error ocurred creating the file "+ err.message)
+        }
+
+        textMD5 = md5(jamesonEditor.codemirror.getValue());
+    });
+}
+
+function _saveas(){
   var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
   dialog.showSaveDialog((fileName) => {
     if (fileName === undefined){
@@ -68,6 +88,7 @@ function _save(){
         }
 
         textMD5 = md5(jamesonEditor.codemirror.getValue());
+        currentFileName = fileName;
     });
 });
 }
@@ -90,6 +111,7 @@ function _open(){
 
       jamesonEditor.codemirror.setValue(data);
       textMD5 = md5(jamesonEditor.codemirror.getValue());
+      currentFileName = fileNames[0];
     });
   });
 }

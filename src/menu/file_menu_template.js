@@ -12,6 +12,13 @@ export const fileMenuTemplate = {
       },
     },
     {
+      label: 'Save',
+      accelerator: 'CmdOrCtrl+S',
+      click: () => {
+        BrowserWindow.getFocusedWindow().webContents.send('save');
+      },
+    },
+    {
       label: 'Save As',
       click: () => {
         BrowserWindow.getFocusedWindow().webContents.send('saveas');
