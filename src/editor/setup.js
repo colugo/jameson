@@ -2,8 +2,10 @@
 
 import SimpleMDE from 'simplemde';
 
+
 import {addSentenceMode} from './sentence';
 import {addReplaceMode} from './replace';
+import {addHardWordMode} from './hardWords';
 
 export const setup = () => {
   var simplemde = new SimpleMDE({
@@ -53,6 +55,7 @@ export const setup = () => {
   });
   addSentenceMode(simplemde);
   addReplaceMode(simplemde);
+  addHardWordMode(simplemde);
 
   simplemde.codemirror.on("update", function() {
     setupReplaceHandler();

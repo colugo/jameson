@@ -14,7 +14,6 @@ function setupReadabilityHandler(){
 /*
   var score = 206.835 - 1.015 * (wordCount / numberOfSentences) - 84.6 * (syllables / wordCount)
 
-
   var grade = "College Graduate";
   if(score > 30) grage = "College";
   if(score > 50) grade =  "10th to 12th";
@@ -24,10 +23,9 @@ function setupReadabilityHandler(){
   if(score > 90) grade = "5th";
 
   console.log("Reading level = " + grade);
-  */
+*/
   var score = 0.39 * (wordCount / numberOfSentences) + 11.8 * (syllables / wordCount) - 15.59;
   if(score < 0) score = "-";
-  console.log("Reading grade = " + score);
   $('.readability').text(score.toFixed());
   $('.wordCount').text(wordCount);
 }

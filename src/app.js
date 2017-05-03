@@ -2,7 +2,6 @@
 
 // Small helpers you might want to keep
 import './helpers/context_menu.js';
-import './helpers/external_links.js';
 
 
 import { remote } from 'electron';
@@ -16,7 +15,7 @@ function setupReplacementWords(){
   var plainEnglishReplacementsKeywordString = "";
   for(var key in plainEnglishReplacements)
   {
-    plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString + key + "|";
+    plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString + "\\b" + key + "\\b|";
   }
   plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString.substring(0, plainEnglishReplacementsKeywordString.length - 1);
   plainEnglishReplacementsRegex = new RegExp(plainEnglishReplacementsKeywordString, 'i');
