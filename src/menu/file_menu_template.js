@@ -14,7 +14,7 @@ export const fileMenuTemplate = {
     label: 'Quit',
     accelerator: 'CmdOrCtrl+Q',
     click: () => {
-      app.quit();
+      BrowserWindow.getFocusedWindow().webContents.send('quit');
     },
   }],
 };

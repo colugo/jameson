@@ -9,7 +9,7 @@ const app = remote.app;
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 const appDir = jetpack.cwd(app.getAppPath());
-var textMD5 = "";
+var textMD5 = md5("");
 
 
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
@@ -34,7 +34,19 @@ jamesonEditor = setup();
 const ipcRenderer = require('electron').ipcRenderer;
 
 ipcRenderer.on('open', (event) => {
-  showModal();
+  if(md5(jamesonEditor.codemirror.getValue()) == textMD5){
+    _open();
+  }else{
+    showModal(_open, closeModal);
+  }
+});
+
+ipcRenderer.on('quit', (event) => {
+  if(md5(jamesonEditor.codemirror.getValue()) == textMD5){
+    _quit();
+  }else{
+    showModal(_quit, closeModal);
+  }
 });
 
 function _open(){
@@ -64,16 +76,13 @@ function closeModal(){
   modal.style.display = "none";
 }
 
-function showModal(){
+function _quit(){
+  app.quit();
+}
 
-
+function showModal(yesFunction, noFunction){
   $('#modal-header-content').text("You have unsaved changes!");
-  $('.modal-body').html("<p>You will lose your chanages if you open another document.</p><p>Are you sure you want to do this?</p>");
-
-/*
-  var btn = document.createElement("BUTTON");
-  $('.modal-footer').appendChild(btn);
-*/
+  $('.modal-body').html("<p>You will lose your chanages if you do this.</p><p>Are you sure you want to do this?</p>");
 
   var buttonDiv = document.getElementById('modal-footer');
   buttonDiv.innerHTML = "";
@@ -81,12 +90,12 @@ function showModal(){
   var okButton = document.createElement("button");
   okButton.innerHTML="Yes, I'm OK to lose my changes";
   buttonDiv.appendChild(okButton);
-  okButton.addEventListener ("click", _open);
+  okButton.addEventListener ("click", yesFunction);
 
   var noButton = document.createElement("button");
   noButton.innerHTML="No, I want to keep my changes";
   buttonDiv.appendChild(noButton);
-  noButton.addEventListener ("click", closeModal);
+  noButton.addEventListener ("click", noFunction);
 
 
   // Get the modal
