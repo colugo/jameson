@@ -49,6 +49,29 @@ ipcRenderer.on('quit', (event) => {
   }
 });
 
+ipcRenderer.on('saveas', (event) => {
+  _save();
+});
+
+function _save(){
+  var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+  dialog.showSaveDialog((fileName) => {
+    if (fileName === undefined){
+        console.log("You didn't save the file");
+        return;
+    }
+
+    // fileName is a string that contains the path and filename created in the save file dialog.
+    fs.writeFile(fileName, jamesonEditor.codemirror.getValue(), (err) => {
+        if(err){
+            alert("An error ocurred creating the file "+ err.message)
+        }
+
+        textMD5 = md5(jamesonEditor.codemirror.getValue());
+    });
+});
+}
+
 function _open(){
   var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
   closeModal();
