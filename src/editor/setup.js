@@ -21,7 +21,7 @@ export const setup = () => {
   	},
   	element: document.getElementById("main_editor"),
   	forceSync: true,
-  	hideIcons: ["heading","fullscreen","table","code"],
+  	hideIcons: ["fullscreen","table","code","side-by-side"],
   	indentWithTabs: false,
   	initialValue: "",
   	insertTexts: {
@@ -51,7 +51,7 @@ export const setup = () => {
   	status: ["words"],
   	styleSelectedText: false,
   	tabSize: 4,
-    toolbar: false,
+    //toolbar: false,
   	toolbarTips: true
   });
   addSentenceMode(simplemde);
