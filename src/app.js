@@ -89,6 +89,7 @@ function _saveas(){
 
         textMD5 = md5(jamesonEditor.codemirror.getValue());
         currentFileName = fileName;
+        setTitleToFileName();
     });
 });
 }
@@ -112,6 +113,7 @@ function _open(){
       jamesonEditor.codemirror.setValue(data);
       textMD5 = md5(jamesonEditor.codemirror.getValue());
       currentFileName = fileNames[0];
+      setTitleToFileName();
     });
   });
 }
@@ -150,6 +152,14 @@ function showModal(yesFunction, noFunction){
   // When the user clicks on <span> (x), close the modal
   $('.close').on('click', closeModal);
 
+}
+
+function setTitleToFileName(){
+  document.title = "Jameson Copy Editor - " + currentFileBaseName();
+}
+
+function currentFileBaseName(){
+  return currentFileName.replace(/^.*[\\\/]/, '');
 }
 /*
 
