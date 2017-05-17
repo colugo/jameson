@@ -51,7 +51,7 @@ ipcRenderer.on('quit', (event) => {
 });
 
 ipcRenderer.on('saveas', (event) => {
-  _save();
+  _saveas();
 });
 
 ipcRenderer.on('save', (event) => {
