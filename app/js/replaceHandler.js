@@ -5,11 +5,16 @@ var plainEnglishReplacementsRegex;
 function replaceHandler(wordSpan, newWord) {
 
   var cursor = jamesonEditor.codemirror.getCursor();
-
+  var span = $('#' + wordSpan);
   var containerPre = $('#' + wordSpan).closest("pre");
-  var previous = containerPre.prev();
-  var text = containerPre.text().replace(/\u200B/g,'').replace($('#' + wordSpan).text(), newWord);
+  var previous = span.prev();
+  var next = span.next();
 
+  var newBlock = previous.text() +  newWord + next.text();
+  var oldBlock = previous.text() +  span.text() + next.text();
+
+  //var text = containerPre.text().replace(/\u200B/g,'').replace($('#' + wordSpan).text(), newWord);
+/*
   while(previous.length > 0){
     if(previous[0].style.display == "none"){
       previous = previous.prev();
@@ -29,8 +34,13 @@ function replaceHandler(wordSpan, newWord) {
     text = text + "\n" + workingText;
     next = next.next();
   }
+*/
 
+
+
+  var text = jamesonEditor.codemirror.getValue();
   text = text.replace(/\u200B/g,'');
+  text = text.replace(oldBlock, newBlock);
 
   jamesonEditor.codemirror.setValue(text);
   jamesonEditor.codemirror.setCursor(cursor);
