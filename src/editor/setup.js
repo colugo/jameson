@@ -72,7 +72,6 @@ function captureLanguageXHR(){
 
     XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
 
-        console.log(url);
         if(url == 'https://cdn.jsdelivr.net/codemirror.spell-checker/latest/en_US.aff'){
           url = 'https://gitcdn.xyz/cdn/colugo/jameson/master/lang/en_AU.aff';
         }
