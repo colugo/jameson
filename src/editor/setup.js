@@ -8,6 +8,7 @@ import {addReplaceMode} from './replace';
 import {addHardWordMode} from './hardWords';
 
 export const setup = () => {
+  captureLanguageXHR();
   var simplemde = new SimpleMDE({
   	autofocus: true,
   	autosave: {
@@ -65,3 +66,21 @@ export const setup = () => {
 
   return simplemde;
 };
+
+function captureLanguageXHR(){
+  (function(open) {
+
+    XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
+
+        console.log(url);
+        if(url == 'https://cdn.jsdelivr.net/codemirror.spell-checker/latest/en_US.aff'){
+          url = 'https://gitcdn.xyz/cdn/colugo/jameson/master/lang/en_AU.aff';
+        }
+        if(url == 'https://cdn.jsdelivr.net/codemirror.spell-checker/latest/en_US.dic'){
+          url = 'https://gitcdn.xyz/cdn/colugo/jameson/master/lang/en_AU.dic';
+        }
+        open.call(this, method, url, async, user, pass);
+    };
+
+  })(XMLHttpRequest.prototype.open);
+}
