@@ -77,9 +77,8 @@ export default (name, options) => {
   win = new BrowserWindow(Object.assign({}, options, state));
 
 win.on('close', function(e){
-
-       win.webContents.send('quit');
        if(win.getTitle() != "reallyCanClose"){
+         win.webContents.send('quit');
          e.preventDefault();
        }
     });

@@ -125,7 +125,8 @@ function closeModal(){
 
 function _quit(){
   BrowserWindow.getFocusedWindow().setTitle("reallyCanClose");
-  app.quit();
+  //app.quit();
+  BrowserWindow.getFocusedWindow().destroy();
 }
 
 function showModal(yesFunction, noFunction){
