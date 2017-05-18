@@ -75,28 +75,11 @@ export default (name, options) => {
   state = ensureVisibleOnSomeDisplay(restore());
 
   win = new BrowserWindow(Object.assign({}, options, state));
-/*
-  //win.on('close', saveState);
-  win.on('beforeunload', function(event){
-    console.log("prevent");
-    //event.preventDefault();
-    saveState();
-    win.webContents.send('quit');
-    //console.log("destroy");
-    //win.destroy();
-    event.returnValue = false
-  });
-*/
 
 win.on('close', function(e){
-    var choice = require('electron').dialog.showMessageBox(this,
-        {
-          type: 'question',
-          buttons: ['Yes', 'No'],
-          title: 'Confirm',
-          message: 'Are you sure you want to quit?'
-       });
-       if(choice == 1){
+
+       win.webContents.send('quit');
+       if(win.getTitle() != "reallyCanClose"){
          e.preventDefault();
        }
     });
