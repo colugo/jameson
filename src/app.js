@@ -131,7 +131,7 @@ function _quit(){
 
 function showModal(yesFunction, noFunction){
   $('#modal-header-content').text("You have unsaved changes!");
-  $('.modal-body').html("<p>You will lose your chanages if you do this.</p><p>Are you sure you want to do this?</p>");
+  $('.modal-body').html("<p>You are about to lose your changes!</p><p>Are you sure you want to do this?</p>");
 
   var buttonDiv = document.getElementById('modal-footer');
   buttonDiv.innerHTML = "";
