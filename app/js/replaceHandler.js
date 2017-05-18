@@ -5,41 +5,15 @@ var plainEnglishReplacementsRegex;
 function replaceHandler(wordSpan, newWord) {
 
   var cursor = jamesonEditor.codemirror.getCursor();
+  var scrollY =  jamesonEditor.codemirror.getScrollInfo().top;
   var span = $('#' + wordSpan);
   var containerPre = $('#' + wordSpan).closest("pre");
   var oldBlock = containerPre.text();
+  // Removing the class stops the onChange event from failing on this span
+  // because the word isn't a plainEnglishWord anymore
+  span.removeClass("cm-replace");
   span.text(newWord);
   var newBlock = containerPre.text();
-//  var previous = span.prev();
-//  var next = span.next();
-
-//  var newBlock = previous.text() +  newWord + next.text();
-//  var oldBlock = previous.text() +  span.text() + next.text();
-
-  //var text = containerPre.text().replace(/\u200B/g,'').replace($('#' + wordSpan).text(), newWord);
-/*
-  while(previous.length > 0){
-    if(previous[0].style.display == "none"){
-      previous = previous.prev();
-      continue;
-    }
-    workingText = previous.text().replace(/\u200B/g,'');
-    text = workingText + "\n" + text;
-    previous = previous.prev();
-  }
-  var next = containerPre.next();
-  while(next.length > 0){
-    if(next[0].style.display == "none"){
-      next = next.next();
-      continue;
-    }
-    workingText = next.text();
-    text = text + "\n" + workingText;
-    next = next.next();
-  }
-*/
-
-
 
   var text = jamesonEditor.codemirror.getValue();
   text = text.replace(/\u200B/g,'');
@@ -47,6 +21,7 @@ function replaceHandler(wordSpan, newWord) {
 
   jamesonEditor.codemirror.setValue(text);
   jamesonEditor.codemirror.setCursor(cursor);
+  jamesonEditor.codemirror.scrollTo(null,scrollY);
   jamesonEditor.codemirror.focus();
 
 }
@@ -66,6 +41,10 @@ function setupReplaceHandler(){
 var replaceTooltipContent = function(wordSpan) {
 
   var word = wordSpan.innerText.toLowerCase();
+  if(plainEnglishReplacements[word] == undefined){
+    // This happens when I change the text of the span
+    console.log("undefined word : " + word);
+  }
   var html = "<ul>";
   for(var i = 0; i < plainEnglishReplacements[word].length; i ++){
     var option = plainEnglishReplacements[word][i];
