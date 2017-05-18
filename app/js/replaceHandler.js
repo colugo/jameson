@@ -7,11 +7,14 @@ function replaceHandler(wordSpan, newWord) {
   var cursor = jamesonEditor.codemirror.getCursor();
   var span = $('#' + wordSpan);
   var containerPre = $('#' + wordSpan).closest("pre");
-  var previous = span.prev();
-  var next = span.next();
+  var oldBlock = containerPre.text();
+  span.text(newWord);
+  var newBlock = containerPre.text();
+//  var previous = span.prev();
+//  var next = span.next();
 
-  var newBlock = previous.text() +  newWord + next.text();
-  var oldBlock = previous.text() +  span.text() + next.text();
+//  var newBlock = previous.text() +  newWord + next.text();
+//  var oldBlock = previous.text() +  span.text() + next.text();
 
   //var text = containerPre.text().replace(/\u200B/g,'').replace($('#' + wordSpan).text(), newWord);
 /*
@@ -45,6 +48,7 @@ function replaceHandler(wordSpan, newWord) {
   jamesonEditor.codemirror.setValue(text);
   jamesonEditor.codemirror.setCursor(cursor);
   jamesonEditor.codemirror.focus();
+
 }
 
 
