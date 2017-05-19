@@ -17,8 +17,16 @@ var suggestTooltip = function(wordSpan) {
 
   var word = wordSpan.innerText.toLowerCase();
   var html = "<p>";
-  console.log("suggestion: " + word);
-  html = html + suggestions[word][0];
+  var suggestion;
+  // find which suggestion regex matches.
+  for(var regex in suggestions){
+    if(word.match(regex)){
+      suggestion = suggestions[regex][0];
+      break;
+    }
+  }
+  html = html + suggestion;
+
   html = html + "</p>";
   return document.createElement("span").html=html;
 };

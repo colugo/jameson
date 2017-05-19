@@ -1,3 +1,5 @@
 {
-  ", and" : ["Should this be a bulleted list?","","\\b"]
+  ", and" : ["Should this be a bulleted list?","","\\b"],
+  ", or" : ["Should this be a bulleted list?","","\\b"],
+  ",[^.]*," : ["Use commas minimally","",""]
 }
