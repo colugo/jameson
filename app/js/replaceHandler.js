@@ -2,6 +2,7 @@ var jamesonEditor;
 var plainEnglishReplacements;
 var plainEnglishReplacementsRegex;
 
+
 function replaceHandler(wordSpan, newWord) {
 
   var cursor = jamesonEditor.codemirror.getCursor();
@@ -46,8 +47,8 @@ var replaceTooltipContent = function(wordSpan) {
     console.log("undefined word : " + word);
   }
   var html = "<ul>";
-  for(var i = 0; i < plainEnglishReplacements[word].length; i ++){
-    var option = plainEnglishReplacements[word][i];
+  for(var i = 0; i < plainEnglishReplacements[word][0].length; i ++){
+    var option = plainEnglishReplacements[word][0][i];
     var li = "<li><a href='#' onclick=\"replaceHandler(\'" + wordSpan.id + "\', \'" + option + "\');\">" + option + "</a></li>";
     html = html + li;
   }

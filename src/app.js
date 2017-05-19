@@ -14,16 +14,23 @@ var currentFileName = "";
 
 
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
-setupReplacementWords();
+suggestions = appDir.read('suggestions.json', 'json');
 
-function setupReplacementWords(){
-  var plainEnglishReplacementsKeywordString = "";
-  for(var key in plainEnglishReplacements)
+
+plainEnglishReplacementsRegex = setupReplacementWords(plainEnglishReplacements);
+suggestionsRegex = setupReplacementWords(suggestions);
+
+
+function setupReplacementWords(list){
+  var keywordString = "";
+  for(var key in list)
   {
-    plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString + "\\b" + key + "\\b|";
+    var prefix = list[key][1];
+    var suffix = list[key][2];
+    keywordString = keywordString + prefix + key + suffix + "|";
   }
-  plainEnglishReplacementsKeywordString = plainEnglishReplacementsKeywordString.substring(0, plainEnglishReplacementsKeywordString.length - 1);
-  plainEnglishReplacementsRegex = new RegExp(plainEnglishReplacementsKeywordString, 'i');
+  keywordString = keywordString.substring(0, keywordString.length - 1);
+  return new RegExp(keywordString, 'i');
 }
 
 

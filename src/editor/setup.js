@@ -5,6 +5,7 @@ import SimpleMDE from 'simplemde';
 
 import {addSentenceMode} from './sentence';
 import {addReplaceMode} from './replace';
+import {addSuggestMode} from './suggest';
 import {addHardWordMode} from './hardWords';
 
 export const setup = () => {
@@ -57,10 +58,12 @@ export const setup = () => {
   });
   addSentenceMode(simplemde);
   addReplaceMode(simplemde);
+  addSuggestMode(simplemde);
   addHardWordMode(simplemde);
 
   simplemde.codemirror.on("update", function() {
     setupReplaceHandler();
+    setupSuggestHandler();
     setupReadabilityHandler();
   });
 
