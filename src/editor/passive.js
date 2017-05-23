@@ -40,6 +40,6 @@ function processSentence(stream, sentence){
     stream.eat(part);
 
 //    console.log("current : " + stream.current());
-    return "suggest";
+    return "passive";
   }
 }

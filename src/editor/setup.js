@@ -64,6 +64,7 @@ export const setup = () => {
   addHardWordMode(simplemde);
 
   simplemde.codemirror.on("update", function() {
+    setupPassvieHandler();
     setupReplaceHandler();
     setupSuggestHandler();
     setupReadabilityHandler();
