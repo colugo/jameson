@@ -4,6 +4,7 @@ import SimpleMDE from 'simplemde';
 
 
 import {addSentenceMode} from './sentence';
+import {addPassiveMode} from './passive';
 import {addReplaceMode} from './replace';
 import {addSuggestMode} from './suggest';
 import {addHardWordMode} from './hardWords';
@@ -57,6 +58,7 @@ export const setup = () => {
   	toolbarTips: true
   });
   addSentenceMode(simplemde);
+  addPassiveMode(simplemde);
   addReplaceMode(simplemde);
   addSuggestMode(simplemde);
   addHardWordMode(simplemde);
