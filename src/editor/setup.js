@@ -3,6 +3,7 @@
 import SimpleMDE from 'simplemde';
 
 
+import {addAdverbsMode} from './adverbs';
 import {addSentenceMode} from './sentence';
 import {addPassiveMode} from './passive';
 import {addReplaceMode} from './replace';
@@ -57,6 +58,7 @@ export const setup = () => {
     //toolbar: false,
   	toolbarTips: true
   });
+  addAdverbsMode(simplemde);
   addSentenceMode(simplemde);
   addPassiveMode(simplemde);
   addReplaceMode(simplemde);
@@ -64,6 +66,7 @@ export const setup = () => {
   addHardWordMode(simplemde);
 
   simplemde.codemirror.on("update", function() {
+    setupAdverbHandler();
     setupPassvieHandler();
     setupReplaceHandler();
     setupSuggestHandler();

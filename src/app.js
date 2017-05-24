@@ -15,11 +15,12 @@ var currentFileName = "";
 
 plainEnglishReplacements = appDir.read('plainEnglishReplacements.json', 'json');
 suggestions = appDir.read('suggestions.json', 'json');
+adverbs = appDir.read('adverbs.json', 'json');
 
 
 plainEnglishReplacementsRegex = setupReplacementWords(plainEnglishReplacements);
 suggestionsRegex = setupReplacementWords(suggestions);
-
+adverbsRegex = setupReplacementWords(adverbs);
 
 function setupReplacementWords(list){
   var keywordString = "";

@@ -1,19 +1,19 @@
 
-function setupPassvieHandler(){
-  var wordToSuggest= document.getElementsByClassName("cm-passive");
+function setupAdverbHandler(){
+  var wordToSuggest= document.getElementsByClassName("cm-adverb");
   if(wordToSuggest.length > 0 ){
     Opentip.tips = [];
     for (var i = 0; i < wordToSuggest.length; i++) {
         getId(wordToSuggest[i]);
-        var tip = new Opentip(wordToSuggest[i], passiveTooltip(wordToSuggest[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
+        var tip = new Opentip(wordToSuggest[i], adverbTooltip(wordToSuggest[i]) ,{ target: true, tipJoint: "bottom", targetJoint: "top", containInViewport: false, showOn: "mouseover", hideDelay: 1.5, removeElementsOnHide: true});
     }
   }
 }
 
-var passiveTooltip = function(wordSpan) {
+var adverbTooltip = function(wordSpan) {
 
   var word = wordSpan.innerText.toLowerCase();
-  var html = "<p>Passive voice?</p>";
+  var html = "<p>Adverb?</p>Consider rewriting";
     return document.createElement("span").html=html;
 };
 

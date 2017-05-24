@@ -1,4 +1,8 @@
 var jamesonEditor;
+
+var adverbs;
+var adverbsRegex;
+
 var plainEnglishReplacements;
 var plainEnglishReplacementsRegex;
 
